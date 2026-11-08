@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>سيناريو اختبار الجرد</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="top">
+    <div class="wrap top-row">
+      <div>
+        <p class="eyebrow">جرد هيونداي · اختبار من الألف إلى الياء</p>
+        <h1>سيناريو الاختبار وصور المسح</h1>
+      </div>
+      <div class="progress" aria-live="polite">
+        <span id="progress-label">0 من 0</span>
+        <div class="bar" aria-hidden="true"><i id="progress-bar"></i></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="card lead">
+      <h2>كيف تستخدم هذه الصفحة</h2>
+      <ol class="how">
+        <li>افتح الصفحة على الحاسوب. لوحة التحكم على <span class="mono" dir="ltr">http://127.0.0.1:5169</span></li>
+        <li>اكتب رقم الفرع ورقم المخزن كما يظهران في لوحة التحكم، ثم نزّل ملف الجلسة وارفعه عند بدء الجرد.</li>
+        <li>على الهاتف افتح تطبيق الجرد. عندما يطلب المسح، اضغط «تكبير للمسح» وقرّب الكاميرا من الشاشة نحو 20 سم حتى يثبت الرمز.</li>
+        <li>القطع تُمسح بالباركود. رقم الشاصي نص مطبوع تقرأه الكاميرا، وليس باركودًا.</li>
+        <li>فعّل موقع الهاتف. الإحداثيات 0,0 تُرفض.</li>
+      </ol>
+    </section>
+
+    <section class="card" id="setup">
+      <h2>أرقام ملف الجلسة</h2>
+      <p class="muted">من لوحة التحكم: الفروع ← رقم الفرع، والمخازن ← رقم المخزن. الملف يُرفض إذا لم يطابق الرقم الموجود في النظام.</p>
+      <form class="nums" id="nums">
+        <label>رقم الفرع (BranchNo.)
+          <input id="branch-no" inputmode="numeric" dir="ltr" autocomplete="off" required placeholder="مثال: 1" />
+        </label>
+        <label>رقم المخزن (WarehouseNo.)
+          <input id="warehouse-no" inputmode="numeric" dir="ltr" autocomplete="off" required placeholder="مثال: 4" />
+        </label>
+        <button class="btn primary" type="submit">تنزيل ملف الجلسة</button>
+      </form>
+      <p class="hint" id="file-hint"></p>
+    </section>
+
+    <section class="card">
+      <h2>الحسابات</h2>
+      <p class="muted">أنشئها من لوحة المسؤول الرئيسي. لا يتشارك مشرف وموظف التطبيق رقم الهاتف نفسه. كلمة مرور الجميع ما عدا المسؤول الرئيسي: <b class="mono" dir="ltr">Test1234</b></p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>الدور</th><th>الاسم</th><th>الهاتف</th><th>أين يُنشأ</th><th>النطاق</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>المسؤول الرئيسي</td><td>المسؤول الرئيسي</td><td><button class="copy" type="button" data-copy="07700000000">07700000000</button><span class="sub">Admin123</span></td><td>موجود جاهزًا</td><td>كل الفروع</td></tr>
+            <tr><td>موظف الجرد</td><td>أحمد الجرد</td><td><button class="copy" type="button" data-copy="07711110001">07711110001</button></td><td>المستخدمين</td><td>فرع المنصور ومخزنه</td></tr>
+            <tr><td>أدمن الفرع</td><td>أدمن المنصور</td><td><button class="copy" type="button" data-copy="07722220002">07722220002</button></td><td>المشرفين · أدمن</td><td>فرع واحد</td></tr>
+            <tr><td>مدير المخزن</td><td>مدير المخزن</td><td><button class="copy" type="button" data-copy="07733330003">07733330003</button></td><td>المشرفين · مدير مخزن</td><td>مخزن المنصور</td></tr>
+            <tr><td>مدير قطع الغيار</td><td>مدير القطع</td><td><button class="copy" type="button" data-copy="07744440004">07744440004</button></td><td>المشرفين · مدير قطع الغيار</td><td>فرع المنصور</td></tr>
+            <tr><td>المحاسب</td><td>محاسب الفرع</td><td><button class="copy" type="button" data-copy="07755550005">07755550005</button></td><td>المشرفين · محاسب</td><td>فرع المنصور</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="steps">
+      <div class="section-head">
+        <h2>خطوات الاختبار</h2>
+        <button class="btn" type="button" id="reset">مسح علامات الإنجاز</button>
+      </div>
+
+      <article class="group">
+        <h3>1. تجهيز اللوحة</h3>
+        <ol class="steps" data-group="setup"></ol>
+      </article>
+      <article class="group">
+        <h3>2. جرد القطع من التطبيق</h3>
+        <p class="muted">ادخل بحساب أحمد، ثم جرد قطع الغيار ← ابدأ الجرد. اختر فرع المنصور، والموقع كما هو مكتوب تحت كل صورة.</p>
+        <ol class="steps" data-group="count"></ol>
+      </article>
+      <article class="group">
+        <h3>3. قطعة غير موجودة وتعديل كمية</h3>
+        <ol class="steps" data-group="requests"></ol>
+      </article>
+      <article class="group">
+        <h3>4. جرد السيارات</h3>
+        <p class="muted">جرد السيارات يصوّر ملصق الزجاج: شعار هيونداي ثم رقم الشاصي في سطر واحد. ليس باركودًا.</p>
+        <ol class="steps" data-group="cars"></ol>
+      </article>
+      <article class="group">
+        <h3>5. الموافقات في اللوحة</h3>
+        <ol class="steps" data-group="approve"></ol>
+      </article>
+      <article class="group">
+        <h3>6. الفروقات ثم إنهاء الجلسة</h3>
+        <ol class="steps" data-group="close"></ol>
+      </article>
+    </section>
+
+    <section class="card" id="gallery">
+      <h2>كل صور الجرد</h2>
+      <p class="muted">نفس الصور الموجودة داخل الخطوات. يمكن تكبير أي صورة أو تنزيلها.</p>
+      <div id="gallery-grid" class="grid"></div>
+    </section>
+  </main>
+
+  <div class="scan" id="scan" hidden>
+    <div class="scan-bar">
+      <p id="scan-title"></p>
+      <button class="btn" type="button" id="scan-close">إغلاق</button>
+    </div>
+    <canvas id="scan-canvas"></canvas>
+    <p class="scan-foot" id="scan-foot"></p>
+  </div>
+  <p class="toast" id="toast" hidden role="status"></p>
+  <script src="app.js"></script>
+</body>
+</html>
